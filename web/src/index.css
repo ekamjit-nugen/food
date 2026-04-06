@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Google Fonts ──────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ── Base layer ───────────────────────────────────────────────────── */
+@layer base {
+  body {
+    @apply bg-surface-page text-warm-900 font-sans text-base antialiased;
+  }
+
+  ::selection {
+    @apply bg-brand-light text-brand;
+  }
+
+  /* Focus ring for all interactive elements */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-brand-ring;
+  }
+
+  /* Smooth scroll only if user hasn't set prefers-reduced-motion */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  /* Thin scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #D4CFC7 transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: #D4CFC7;
+    border-radius: 9999px;
+  }
+
+  /* Print: hide non-essential UI */
+  @media print {
+    .print\:hidden,
+    nav,
+    header,
+    button {
+      display: none !important;
+    }
+  }
+}
+
+/* ── Component utility classes ────────────────────────────────────── */
+@layer components {
+  .btn-primary {
+    @apply bg-brand text-white font-medium px-5 py-2.5 rounded-sm
+           hover:bg-brand-hover active:scale-[0.98]
+           transition-all duration-150
+           focus-visible:ring-2 focus-visible:ring-brand-ring
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply bg-white border border-warm-300 text-warm-900 font-medium px-5 py-2.5 rounded-sm
+           hover:bg-warm-100 active:scale-[0.98]
+           transition-all duration-150
+           focus-visible:ring-2 focus-visible:ring-brand-ring
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-danger {
+    @apply bg-white border border-status-red/30 text-status-red font-medium px-5 py-2.5 rounded-sm
+           hover:bg-status-red-light active:scale-[0.98]
+           transition-all duration-150
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent text-warm-700 font-medium px-4 py-2 rounded-sm
+           hover:bg-warm-100 active:scale-[0.98]
+           transition-all duration-150;
+  }
+
+  .input-base {
+    @apply w-full h-11 px-3.5 border-[1.5px] border-warm-300 rounded-sm
+           bg-white text-warm-900 placeholder:text-warm-500
+           focus:border-brand focus:ring-2 focus:ring-brand-ring
+           transition-colors text-base;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-green {
+    @apply badge bg-status-green-light text-status-green;
+  }
+
+  .badge-amber {
+    @apply badge bg-status-amber-light text-status-amber;
+  }
+
+  .badge-red {
+    @apply badge bg-status-red-light text-status-red;
+  }
+
+  .badge-blue {
+    @apply badge bg-status-blue-light text-status-blue;
+  }
+
+  .badge-violet {
+    @apply badge bg-status-violet-light text-status-violet;
+  }
+
+  .badge-warm {
+    @apply badge bg-warm-200 text-warm-700;
+  }
+}

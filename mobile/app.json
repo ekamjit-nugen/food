@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "Food Staff",
+    "slug": "food-staff",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": false,
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0f172a"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.food.staff",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Food Staff uses the camera to scan pairing QR codes from your admin."
+      }
+    },
+    "android": {
+      "package": "com.food.staff",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0f172a"
+      },
+      "permissions": ["CAMERA"]
+    },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow Food Staff to use the camera to scan pairing QR codes."
+        }
+      ]
+    ],
+    "extra": {
+      "apiBaseUrl": "http://localhost:4000"
+    }
+  }
+}

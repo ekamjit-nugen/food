@@ -1,0 +1,38 @@
+# Local development dependencies. One service, because v1 only needs Postgres.
+#
+# Usage:
+#   docker compose up -d        # start postgres in background
+#   docker compose down         # stop (data persists in the named volume)
+#   docker compose down -v      # stop AND wipe the database
+#
+# The exposed port (5433) deliberately does NOT collide with a host-installed
+# Postgres on 5432. Update DATABASE_URL in your .env to match:
+#
+#   DATABASE_URL=postgres://food:food@localhost:5433/food
+#
+# For the E2E integration test, spin up a second database on the same server:
+#
+#   docker compose exec postgres psql -U food -c 'CREATE DATABASE food_test;'
+#   TEST_DATABASE_URL=postgres://food:food@localhost:5433/food_test npm test
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: food-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: food
+      POSTGRES_PASSWORD: food
+      POSTGRES_DB: food
+    ports:
+      - '5433:5432'
+    volumes:
+      - food-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U food -d food']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  food-pgdata:
